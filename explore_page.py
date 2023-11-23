@@ -31,15 +31,14 @@ def clean_education(x):
     return 'Less than a Bachelors'
 
 
-@st.cache
 def load_data():
     df = pd.read_csv("survey_results_public.csv")
 
     country_map = shorten_categories(df.Country.value_counts(), 700)
     df["Country"] = df["Country"].map(country_map)
-    df = df[df["Salary"] <= 300000]
-    df = df[df["Salary"] >= 10000]
-    df['Salary'] = df['Salary'] * 75
+    df = df[df["Salary"] <= 20000000]
+    df = df[df["Salary"] >= 5000]
+    df['Salary'] = df['Salary']
     df = df[df["Country"] != "Other"]
 
     df["YearsCodePro"] = df["YearsCodePro"].apply(clean_experience)
@@ -51,7 +50,7 @@ df = load_data()
 
 
 def show_explore_page():
-    st.title("Explore Software Developer Salaries")
+    st.title("Explore Software Developer Salaries:")
 
     st.write(
         """
@@ -65,13 +64,13 @@ def show_explore_page():
     ax1.pie(data, labels=data.index, autopct="%1.1f%%", shadow=True, startangle=90)
     ax1.axis("equal")  # Equal aspect ratio ensures that pie is drawn as a circle.
 
-    st.write("""#### Number of Data from different countries""")
+    st.write("""#### Number of records from different countries""")
 
     st.pyplot(fig1)
 
     st.write(
         """
-    #### Mean Salary Based On Country
+    #### Mean Salary Based On Country:
     """
     )
 
@@ -80,7 +79,7 @@ def show_explore_page():
 
     st.write(
         """
-    #### Mean Salary Based On Experience
+    #### Mean Salary Based On Experience:
     """
     )
 

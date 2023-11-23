@@ -16,7 +16,7 @@ le_education = data["le_education"]
 def show_predict_page():
     st.title("EarningSense: Decode Dev Salaries")
 
-    st.write("""### We need some information to predict the salary""")
+    st.write("""### We need some information to predict the salary:""")
 
     countries = (
         "United States of America",
@@ -49,7 +49,7 @@ def show_predict_page():
     country = st.selectbox("Country", countries)
     education = st.selectbox("Education Level", education_levels)  # Changed variable name
 
-    experience = st.slider("Years of Experience", 0, 50, 3)
+    experience = st.slider("Years of Experience", 0, 50, 1)
 
     ok = st.button("Calculate Salary")
     if ok:
@@ -59,5 +59,4 @@ def show_predict_page():
         X = X.astype(float)
 
         salary = regressor.predict(X)
-        salary = salary * 75
         st.subheader(f"The estimated salary is ₹{salary[0]:.2f}")
